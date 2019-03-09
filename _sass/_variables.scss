@@ -61,6 +61,7 @@ $breakpoint-md: '(min-width: 52em)';
 $breakpoint-xl: '(min-width: 96em)';
 
 // Whitespace
+$space-0: 0rem !default;
 $space-1: .5rem !default;
 $space-2: 1rem !default;
 $space-3: 2rem !default;
@@ -121,7 +122,7 @@ $header-font-weight: 300;
 // Nav
 $nav-color: $mid-gray;
 $nav-link-color: #444;
-$nav-padding: $space-2;
+$nav-padding: $space-0;
 $nav-link-padding-x: $space-2;
 $nav-link-border-bottom: 2px solid #444;
 $nav-active-border-bottom: 1px solid $light-gray;
