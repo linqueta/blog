@@ -5,8 +5,14 @@ permalink: /about/
 tags: about
 ---
 
+<style>
+  img[alt=about_me] {
+    width: 200px;
+  }
+</style>
+
 {:.center}
-![desk]({{ site.baseurl }}/images/me_200x200.png)
+![about_me]({{ site.baseurl }}/images/me.png)
 
 Hey, my name is Lincoln. I'm a software engineer in Brazil, where I work more on backend side than anothers sides. In general, I'm working with many languages and tecnologies, but I love (truthy) Ruby and Ruby on Rails. I even have a certificate of this.
 
