@@ -18,4 +18,4 @@ Hey, my name is Lincoln. I'm a software engineer in Brazil, where I work more on
 
 With this stack, I have many work years, in many projects and companies. For more informations about companies, tecnologies and certificates, see in my [Linkedin](https://www.linkedin.com/in/lincoln-rodrigues-268187103).
 
-Also check my [Github](https://github.com/linqueta), I have wrote many public projects.
+Also check my [Github](https://github.com/linqueta), I have writen many public projects.
