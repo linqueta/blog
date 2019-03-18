@@ -28,7 +28,7 @@ payment = {
 }
 ```
 
-Ruby has three ways to get data into Hash:
+Ruby has three ways to get data from a Hash object:
 1. `dig`
 2. `[]`
 3. `fetch`
