@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ruby - The dig method: Why you should consider using it on complex hashes
+title: Ruby - The dig method
 date: 2019-03-17 18:00
 categories: ruby hash dig
 summary: Easy, safe and fast way to get data from Hash object
