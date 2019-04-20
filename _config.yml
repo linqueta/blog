@@ -2,7 +2,7 @@
 title:       Linqueta
 email:       lincolnrodrs@gmail.com
 author:      Lincoln Rodrigues
-description: "I will write things about it here!"
+description: "Blog about technology and many interesting things"
 baseurl:     "/"
 url:         "http://linqueta.com"
 date_format: "%b %-d, %Y"
@@ -109,6 +109,10 @@ text:
       error:    'Error!'
   thanks: 'Thanks for contacting us. We will reply as soon as possible.'
   og_locale: 'en_US'
+  unknown:
+    body: "Sorry, we can't seem to find this page"
+    contact: 'Contact'
+    home: 'Home'
 
 # Build settings
 markdown:     kramdown
