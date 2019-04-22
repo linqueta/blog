@@ -3,7 +3,7 @@ title:       Linqueta
 email:       lincolnrodrs@gmail.com
 author:      Lincoln Rodrigues
 description: "Blog about technology and many interesting things"
-baseurl:     "/"
+baseurl:     ""
 url:         "http://linqueta.com"
 date_format: "%b %-d, %Y"
 header_pages:
