@@ -23,6 +23,14 @@ layout: default
               {{ post.excerpt }}
             {% endif %}
           </span>
+        </br>
+          <p class="post-tags">
+            {% if post.tags %}
+              {% for tag in post.tags %}
+                #{{ tag }}
+              {% endfor %}
+            {% endif %}
+          </p>
         </div>
       {% endfor %}
     </div>
