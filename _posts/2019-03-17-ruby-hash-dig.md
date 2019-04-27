@@ -8,7 +8,7 @@ description: The why you should consider to use for complex Hashes
 tags: ruby hash dig
 ---
 
-![excavator](http://res.cloudinary.com/linqueta/image/upload/v1556245128/dig.jpg)
+![excavator](https://res.cloudinary.com/linqueta/image/upload/v1556245128/dig.jpg)
 
 The Ruby version 2.3.0 released on final of 2015 brought some interesting features that many Ruby programmers don't know some parts of this. One of the many features introduced is the method `dig`, included on Array and Hash libs. In this post, we will to talk about the method `dig` for Hashes.
 
