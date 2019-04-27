@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Ruby - The method dig
+title: The method dig in Ruby
 date: 2019-03-17 18:00
 categories: ruby hash dig
-summary: Easy, safe and fast way to get data from Hash object
-description: Easy, safe and fast way to get data from Hash object
+summary: The why you should consider to use for complex Hashes
+description: The why you should consider to use for complex Hashes
 tags: ruby hash dig
 ---
 
-![excavator]({{ site.baseurl }}/images/excavator.jpeg)
+![excavator](http://res.cloudinary.com/linqueta/image/upload/v1556245128/dig.jpg)
 
-The Ruby version 2.3.0 released on final of 2015 brought some interesting features that many Ruby programmers don't know some parts of this. One of the many features introduced is the `dig` method, included on Array and Hash libs. In this post, we will to talk about Hash `dig` method.
+The Ruby version 2.3.0 released on final of 2015 brought some interesting features that many Ruby programmers don't know some parts of this. One of the many features introduced is the method `dig`, included on Array and Hash libs. In this post, we will to talk about the method `dig` for Hashes.
 
 ### For the Hash bellow:
 ```ruby
@@ -52,9 +52,9 @@ billet_number = payment.dig(:billet, :number)
 # => nil
 ```
 
-Using the `dig` method is very simple to get data, just put the name of the keys on the params. If the key value is a Hash object, you may get a value from this nested hash, just pass one more param with the key name. Therefore, this name is _dig_, like digger worker, because the diggers dig holes to get anything, in this case, to get key value from Hash object.
+Using the method `dig` is very simple to get data, just put the name of the keys on the params. If the key value is a Hash object, you may get a value from this nested hash, just pass one more param with the key name. Therefore, this name is _dig_, like digger worker, because the diggers dig holes to get anything, in this case, to get key value from Hash object.
 
-An interesting point about the `dig` method rescue from `NoMethodError`, when the previous key value is nil and is trying to get the next key value. Other ways to get data from Hash object raise errors when happen this situation.
+An interesting point about the method `dig` is that it rescues from `NoMethodError`, when the previous key value is nil and it's trying to get the next key value. Other ways to get data from Hash object raise errors when happen this situation.
 
 ### To get data using `[]`:
 ```ruby
@@ -74,7 +74,7 @@ billet_number = payment[:billet][:number]
 # => NoMethodError (undefined method `[]' for nil:NilClass)
 ```
 
-How described above, the native method for to get data from a Hash object (`[]`) not rescue when the previous Hash object is null, raising a `NoMethodError`. If your code doesn't prevent this error, your program may be crashed.
+How described above, the native method for to get data from a Hash object (`[]`) doesn't rescue when the previous Hash object is null, raising a `NoMethodError`. If your code doesn't prevent this error, your program may be crashed.
 
 ### To get data using `fetch`:
 ```ruby
@@ -94,7 +94,7 @@ billet_number = payment.fetch(:billet).fetch(:number)
 # => NoMethodError (undefined method `fetch' for nil:NilClass)
 ```
 
-Using `fetch` we have more errors than the last methods.`KeyError` happens when the key is not present in the Hash object. Also, when there is a another class in the previous value, like `nil` or anything, is raised a `NoMethodError`.
+Using `fetch` we have more errors than the last methods.`KeyError` happens when the key is not present in the Hash object and when there is a another class in the previous value, like `nil` or anything except Hash object, it raised a `NoMethodError`.
 
 ### Ways to rescue from errors
 ```ruby
@@ -114,7 +114,7 @@ billet_number = payment.fetch(:billet) { {} }.fetch(:number){ nil }
 ### And about perfomance...
 
 #### Without treating for errors
-- To get data into the first level
+- To get data in the first level
 
 ```ruby
   require 'benchmark/ips'
@@ -235,9 +235,9 @@ billet_number = payment.fetch(:billet) { {} }.fetch(:number){ nil }
   #   using fetch and default:   2351157.5 i/s - 2.04x  slower
 ```
 
-### Conclusion
+### Why you should consider to use for complex Hashes?
 
-The `dig` method has three main benefits for use it, they are:
+The method `dig` has three main benefits for use it, they are:
 
 - Easy
 - Safe
