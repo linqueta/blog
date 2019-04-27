@@ -12,7 +12,7 @@ tags: about
 </style>
 
 {:.center}
-![about_me]({{ site.baseurl }}/images/me.png)
+![about_me]({{ site.me }})
 
 Hey, my name is Lincoln and I'm a software engineer in Brazil. In the last years, I've worked more with backend than apps and fronted, however, I know and have experience with many programming languages and frameworks, but, I like very much Ruby and Ruby on Rails.
 

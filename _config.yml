@@ -9,6 +9,7 @@ date_format: "%b %-d, %Y"
 header_pages:
  - about.md
  - contact.html
+me: "https://res.cloudinary.com/linqueta/image/upload/q_auto:eco/v1556407392/me_llsdkp.png"
 
 # Google services
 google_verification:
