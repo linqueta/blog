@@ -62,7 +62,7 @@
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
     <meta property="og:site_name" content="{{ site.title | xml_escape }}">
     {% if site.post_preview_image %}
-    <meta property="og:image" content="{{ page.image }}">
+    <meta property="og:image" content="{% if page.image %}{{ page.image | xml_escape }}{% else %}{{ site.me | xml_escape }}{% endif %}">
     {% endif %}
 
     <!-- Twitter Card -->
