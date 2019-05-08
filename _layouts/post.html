@@ -24,16 +24,15 @@ layout: default
     {% endfor %}
   {% endif %}
 </p>
-</br>
-  <span class="post-meta">{{ page.date | date: site.date_format }}</span><br>
+  <span class="post-meta">{{ page.date | date: site.date_format }}</span>
   {% if page.update_date %}
     <span class="post-meta">{{ site.text.post.updated | default: "Updated" }}: {{ page.update_date | date: site.date_format }}</span><br>
   {% endif %}
   <span class="post-meta small">
   {% if page.minutes %}
-    {{ page.minutes }} {{ site.text.post.minute_read | default: "minute read" }}
+    - {{ page.minutes }} {{ site.text.post.minute_read | default: "minute read" }}
   {% else %}
-    {{ minutes }} {{ site.text.post.minute_read | default: "minute read" }}
+    - {{ minutes }} {{ site.text.post.minute_read | default: "minute read" }}
   {% endif %}
   </span>
 </div>
