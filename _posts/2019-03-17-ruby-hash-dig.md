@@ -3,8 +3,8 @@ layout: post
 title: The method dig in Ruby
 date: 2019-03-17 18:00
 categories: ruby hash dig
-summary: The why you should consider to use it for complex Hashes
-description: The why you should consider to use it for complex Hashes
+summary: The why you should consider to use it for complex hashes
+description: The why you should consider to use it for complex hashes
 tags: ruby hash dig
 image: https://res.cloudinary.com/linqueta/image/upload/v1556245128/dig.jpg
 ---
