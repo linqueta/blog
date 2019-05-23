@@ -33,14 +33,31 @@ When generated according to the standard methods, UUIDs are for practical purpos
 #### The why you should use it
 
 UUID has many benefits if compared with sequential id, like these:
-- It turns hard to discover others valid UUIDs
+- It turns hard to discover others valid UUIDs for your model into your database
 - Is not required there is a centralized entity to make new identifiers
 
+It've been used in many kinds of applications, like banks, payment gateways or systems that requires strong and not predictable keys.
 
+### Using it on Rails project with ActiveRecord and Postgresql
 
-#### Commons applications
+Ruby on Rails trought ActiveRecord allows to use UUID in primary keys as default using a Postgresql's function. For make, it's necessary to hability some extensions in the database. For start a project, we may use the code bellow:
 
-#### The library Secure Random
+```bash
+  rails new uuid_app -M -C -J -T -d postgresql
+```
+
+After create the project you should set the generator for set automactly primary key type as UUID. Add this code into the file application.rb:
+<script src="https://gist.github.com/linqueta/83483b70289eb832588f012f94021367.js"></script>
+
+Now your project will set automactly id as UUID, but, you need to set some extensions to Postgresql works with UUID. Make a migration typing this command:
+
+```bash
+  rails g migration enable_uuid_extension_and_pgcrypto
+```
+
+And set the Postgresql extensions:
+<script src="https://gist.github.com/linqueta/eeb7419a131516060c7d0be27a9707d6.js"></script>
+
 
 #### Using UUID as a primary key in a project
 
