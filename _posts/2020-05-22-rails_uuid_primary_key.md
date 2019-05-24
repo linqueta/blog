@@ -11,7 +11,7 @@ image: https://res.cloudinary.com/linqueta/image/upload/v1558403259/keys_ygx9qv.
 
 ![image]({{ page.image }})
 
-When we create a model in Rails, most specifically using the ActiveRecord through a migration, is common to use a id field as primary key. This field has the some resposabilities:
+When we create a model in Rails, most specifically using the ActiveRecord through a migration, is common to use a id field as primary key. This field has some resposabilities:
   - Identify the record
   - Allow that other models refer to this record
 
@@ -40,6 +40,8 @@ It've been used in many kinds of applications, like banks, payment gateways or s
 
 ### Using it on Rails project with ActiveRecord and Postgresql
 
+#### Setting generator, extensions and models
+
 Ruby on Rails trought ActiveRecord allows to use UUID in primary keys as default using a Postgresql's function. For make, it's necessary to hability some extensions in the database. For start a project, we may use the code bellow:
 
 ```bash
@@ -49,15 +51,60 @@ Ruby on Rails trought ActiveRecord allows to use UUID in primary keys as default
 After create the project you should set the generator for set automactly primary key type as UUID. Add this code into the file application.rb:
 <script src="https://gist.github.com/linqueta/83483b70289eb832588f012f94021367.js"></script>
 
-Now your project will set automactly id as UUID, but, you need to set some extensions to Postgresql works with UUID. Make a migration typing this command:
+Now, your project will set automactly id as UUID, but, you need to set some extensions to Postgresql works with UUID. Make a migration typing this command:
 
 ```bash
   rails g migration enable_uuid_extension_and_pgcrypto
 ```
 
-And set the Postgresql extensions:
+After to create the migration, you must set the Postgresql extensions:
 <script src="https://gist.github.com/linqueta/eeb7419a131516060c7d0be27a9707d6.js"></script>
 
+Now, run `rails db:migrate` and we will have the follow database's schema:
+<script src="https://gist.github.com/linqueta/118db0a8c9cdccf476e3d66e65c4c50d.js"></script>
+
+With the required extesions we can create the first model:
+```bash
+  rails g model Author title:string
+```
+
+And was generated this code:
+<script src="https://gist.github.com/linqueta/28723187543309a125427062d23df897.js"></script>
+
+And now, we will create the second model related to the previous:
+```bash
+  rails g model Book title:string author:references
+```
+
+After run the command above, set the references type like this code bellow:
+<script src="https://gist.github.com/linqueta/99bc1920f8df580e368c80b2627b46af.js"></script>
+
+We created all models, but, we need to run again to do a migration on the database. Type it again:
+```bash
+  rails db:migrate
+```
+
+And by final, we have the follow database's schema:
+<script src="https://gist.github.com/linqueta/ce9f8f70f517a1da926e29017b83452a.js"></script>
+
+As we can see the migrations using UUID on primary key (the field id) instead a sequencial number and the value is made using a native Postgresql function:
+```sql
+  gen_random_uuid()
+```
+
+Besides that, the schema was generated with index on foreign keys (references) like when we use a sequencial number:
+```ruby
+  t.index ["author_id"], name: "index_books_on_author_id"
+```
+
+#### It's time (Bruce Buffer saying!)
+
+Now, after all configurations, we can create, find, use belogns and other ActiveRecord::Base methods with our models:
+<script src="https://gist.github.com/linqueta/8df73bf474b1125999de00e4bfd8c7f4.js"></script>
+<script src="https://gist.github.com/linqueta/a7319c1435b72e35dd307e50aab23f00.js"></script>
+<script src="https://gist.github.com/linqueta/0fea04d627734618ca0598cfc0baa3e6.js"></script>
+<script src="https://gist.github.com/linqueta/16bf6fbf616156c63305a9ddfc1bbe82.js"></script>
+<script src="https://gist.github.com/linqueta/018a44cf2bf78ec7c3f49bedaa6db06a.js"></script>
 
 #### Using UUID as a primary key in a project
 
@@ -67,7 +114,6 @@ And set the Postgresql extensions:
  - create book model
  - create author model
  - create reference between book and author
- - belongs and has many
  - default_scope
 
 ### Compare performance beetween UUID create, find, joins
