@@ -11,11 +11,11 @@ image: https://res.cloudinary.com/linqueta/image/upload/v1558403259/keys_ygx9qv.
 
 ![image]({{ page.image }})
 
-When we create a model in Rails, most specifically using the ActiveRecord through migration, is common to use an id field as the primary key. This field has some responsibilities:
+When we create a model in Rails, most specifically using the ActiveRecord through migration is common to use an id field as the primary key. This field has some responsibilities:
   - Identify the record
   - Allow that other models refer to this record
 
-It's known ActiveRecord uses the sequential number or Sequential ID in this field id as default. It's common on relational databases and for make sequential numbers many relational databases use something like a Sequence, to get a new number to each interaction. But use a sequential number as a record identifier can bring many problems:
+It's known ActiveRecord uses the sequential number or Sequential ID in this field id as default. It's common on relational databases use something like a Sequence to make sequential numbers getting a new number to each interaction. But, use a sequential number as a record identifier can bring many problems:
   - Easy prediction for previous and next ids
   - A centralized entity to make new sequential numbers
 
@@ -79,7 +79,7 @@ And now, we will create the second model related to the previous:
   rails g model Book title:string author:references
 ```
 
-After ran the command above, set the references type like this code bellow:
+After execute the command above, set the references type like this code bellow:
 <script src="https://gist.github.com/linqueta/99bc1920f8df580e368c80b2627b46af.js"></script>
 
 We created all models, but, we need to run again to do a migration on the database. Type it again:
@@ -90,7 +90,7 @@ We created all models, but, we need to run again to do a migration on the databa
 And by final, we have the follow database's schema:
 <script src="https://gist.github.com/linqueta/ce9f8f70f517a1da926e29017b83452a.js"></script>
 
-As we can see the migrations using UUID on the primary key (the field id) instead a sequential number and the value is made using a native Postgresql function:
+As we can see the migrations using UUID on the primary key (the field id) instead a sequential number and the value is made using a native Postgresql's function:
 ```sql
   gen_random_uuid()
 ```
@@ -107,7 +107,7 @@ Now, after all configurations, we can create, find and use other ActiveRecord::B
 
 ##### Warning!
 
-When we use UUID with ActiveRecord, some methods like `first` and `last`, the Active Record sorting records by the id as default, but, UUID values aren't sequential, then, we may get an incorrect value. To show it, we will create some authors and search the first.
+When we use UUID with ActiveRecord, when we use some methods like `first` and `last`, the Active Record sorting records by the id as default, but, UUID values aren't sequential, then, we may get an incorrect value. To show it, we will create some authors and search the first.
 
 Creating some authors with UUID on the field `id`:
 <script src="https://gist.github.com/linqueta/a7319c1435b72e35dd307e50aab23f00.js"></script>
@@ -115,12 +115,12 @@ Creating some authors with UUID on the field `id`:
 Finding the first Author:
 <script src="https://gist.github.com/linqueta/0fea04d627734618ca0598cfc0baa3e6.js"></script>
 
-As we can see the first Author created was the famous (or almost it) Yukihiro Matsumoto, but was returned as the first the Rails creator, David Heinemeier Hansson. It happened because ActiveRecord uses the field `id` to order fields as can be seeing in the log:
+As we can see the first Author created was the famous (or almost it) Yukihiro Matsumoto, but was returned as the first the Rails creator, David Heinemeier Hansson (or DHH). It happened because ActiveRecord uses the field `id` to order fields as can be seeing in the log:
 ```ruby
   Author Load (1.2ms)  SELECT  "authors".* FROM "authors" ORDER BY "authors"."id" ASC LIMIT $1  [["LIMIT", 1]]
 ```
 
-To resolve this problem, when we use UUID on the field `id` we should use the timestamp `created_at` to order correctly. For make it, we can use the method `default_scope`:
+To solve this problem, when we use UUID on the field `id` we should use the timestamp `created_at` to order correctly. To make it, we can use the method `default_scope`:
 <script src="https://gist.github.com/linqueta/16bf6fbf616156c63305a9ddfc1bbe82.js"></script>
 
 And finding again:
@@ -130,7 +130,7 @@ Yeah, at now we have the correct first Author created.
 
 #### About performance...
 
-Here are some tests for checking how UUID behaves when compared with Sequential ID. Both tests ran with the localhost database and local application. They are:
+Here are some tests for checking how UUID behaves when compared with Sequential ID. Both tests were executed with the localhost database and local application. They are:
 
 ##### Creating new authors:
 <script src="https://gist.github.com/linqueta/8d83d16e4275b0a98168c9ed2e6794ce.js"></script>
@@ -140,7 +140,7 @@ Here are some tests for checking how UUID behaves when compared with Sequential 
 
 ### Final words
 
-I think that you should consider to use it in your next project because UUID is a secure and strong id for models. Besides that, UUID performance is the same using Sequential ID and it has an easy implementation using ActiveRecord and Postgresql.
+I think that you should consider to use it in your next project because UUID is a secure, strong and not predictable id for models. Besides that, UUID performance is the same using Sequential ID and it has an easy implementation using ActiveRecord and Postgresql.
 
 #### Fonts
 - https://en.wikipedia.org/wiki/Universally_unique_identifier
