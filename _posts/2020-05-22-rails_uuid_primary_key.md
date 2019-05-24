@@ -26,7 +26,10 @@ UUID is a universally unique identifier (UUID) is a 16-octets/128-bit number use
 
 In its canonical textual representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32 alphanumeric characters and 4 hyphens). For example:
 
-`123e4567-e89b-12d3-a456-426655440000`
+```
+123e4567-e89b-12d3-a456-426655440000
+```
+
 
 When generated according to the standard methods, UUIDs are for practical purposes unique, without depending for their uniqueness on a central registration authority or coordination between the parties generating them, unlike most other numbering schemes. While the probability that a UUID will be duplicated is not zero, it is close enough to zero to be negligible.
 
@@ -38,7 +41,7 @@ UUID has many benefits if compared with sequential id, like these:
 
 It've been used in many kinds of applications, like banks, payment gateways or systems that requires strong and not predictable keys.
 
-### Using it on Rails project with ActiveRecord and Postgresql
+### Using UUID on Rails project with ActiveRecord and Postgresql
 
 #### Setting generator, extensions and models
 
@@ -101,10 +104,29 @@ Besides that, the schema was generated with index on foreign keys (references) l
 
 Now, after all configurations, we can create, find, use belogns and other ActiveRecord::Base methods with our models:
 <script src="https://gist.github.com/linqueta/8df73bf474b1125999de00e4bfd8c7f4.js"></script>
+
+##### Warning!
+
+When we use UUID with ActiveRecord, some methods like `first` and `last`, the Active Record sorting records by the id as default, but, UUID values aren't sequencials, then, we may get a incorrect value. To show it, we will create some authors and search the first.
+
+Creating some authors with UUID on the field `id`:
 <script src="https://gist.github.com/linqueta/a7319c1435b72e35dd307e50aab23f00.js"></script>
+
+Finding the first Author:
 <script src="https://gist.github.com/linqueta/0fea04d627734618ca0598cfc0baa3e6.js"></script>
+
+As we can see the first Author created was the famous (or almost it) Yukihiro Matsumoto but was return as the first the Rails creator, David Heinemeier Hansson. It happened because ActiveRecord use the field `id` to order fields as can be seeing in the log:
+```ruby
+  Author Load (1.2ms)  SELECT  "authors".* FROM "authors" ORDER BY "authors"."id" ASC LIMIT $1  [["LIMIT", 1]]
+```
+
+To resolve this problem, when we use UUID on the field `id` we should use the timestamp `created_at` to order correctly. For make it, we can use the method `default_scope`:
 <script src="https://gist.github.com/linqueta/16bf6fbf616156c63305a9ddfc1bbe82.js"></script>
+
+And finding again:
 <script src="https://gist.github.com/linqueta/018a44cf2bf78ec7c3f49bedaa6db06a.js"></script>
+
+Yeah, at now we have the correct first Author created.
 
 #### Using UUID as a primary key in a project
 
