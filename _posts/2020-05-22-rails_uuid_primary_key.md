@@ -15,14 +15,14 @@ When we create a model in Rails, most specifically using the ActiveRecord throug
   - Identify the record
   - Allow that other models refer to this record
 
-It's known ActiveRecord uses the sequential number in this field id as default. It's common on relational databases and for make sequential numbers many relational databases use something like a Sequence, to get a new number to each interaction. But use a sequential number as a record identifier can bring many problems:
-  - Easy prediction previous and next ids
+It's known ActiveRecord uses the sequential number or Sequential ID in this field id as default. It's common on relational databases and for make sequential numbers many relational databases use something like a Sequence, to get a new number to each interaction. But use a sequential number as a record identifier can bring many problems:
+  - Easy prediction for previous and next ids
   - A centralized entity to make new sequential numbers
 
-There is another way to make this identifier without these problems. The way is to use **UUID** as a record identifier.
+There is another way to make this identifier without these problems, using **UUID** as a record identifier.
 
-### UUID
-UUID is a universally unique identifier (UUID) is a 16-octets/128-bit number used to identify information in computer systems. The UUID value is standardized by RFC 4122 to ensure that distributed systems be able to use it.
+### Universally Unique Identifier
+Universally Unique Identifier or UUID is a 16-octets/128-bit number used to identify information in computer systems. The UUID value is standardized by RFC 4122 to ensure that distributed systems be able to use it.
 
 In its canonical textual representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32 alphanumeric characters and 4 hyphens). For example:
 
@@ -35,7 +35,7 @@ When generated according to the standard methods, UUIDs are for practical purpos
 
 #### The why you should use it
 
-UUID has many benefits if compared with the Sequential ID, like these:
+UUID has many benefits if compared with the Sequential ID, like these below:
 - It turns hard to discover others valid UUIDs for your model into your database
 - Is not required there is a centralized entity to make new identifiers
 
@@ -60,13 +60,13 @@ Now, your project will set automatically id as UUID, but, you need to set some e
   rails g migration enable_uuid_extension_and_pgcrypto
 ```
 
-After to create the migration, you must set the Postgresql extensions:
+After creating the migration, you must set the Postgresql extensions:
 <script src="https://gist.github.com/linqueta/eeb7419a131516060c7d0be27a9707d6.js"></script>
 
 Now, run `rails db:migrate` and we will have the follow database's schema:
 <script src="https://gist.github.com/linqueta/118db0a8c9cdccf476e3d66e65c4c50d.js"></script>
 
-With the required extensions we can create the first model:
+With the required extensions we can create the first model, typing this command below:
 ```bash
   rails g model Author title:string
 ```
@@ -79,7 +79,7 @@ And now, we will create the second model related to the previous:
   rails g model Book title:string author:references
 ```
 
-After run the command above, set the references type like this code bellow:
+After ran the command above, set the references type like this code bellow:
 <script src="https://gist.github.com/linqueta/99bc1920f8df580e368c80b2627b46af.js"></script>
 
 We created all models, but, we need to run again to do a migration on the database. Type it again:
@@ -102,7 +102,7 @@ Besides that, the schema was generated with an index on foreign keys (references
 
 #### It's time (Bruce Buffer saying!)
 
-Now, after all configurations, we can create, find, use belogns and other ActiveRecord::Base methods with our models:
+Now, after all configurations, we can create, find and use other ActiveRecord::Base methods with our models:
 <script src="https://gist.github.com/linqueta/8df73bf474b1125999de00e4bfd8c7f4.js"></script>
 
 ##### Warning!
@@ -115,7 +115,7 @@ Creating some authors with UUID on the field `id`:
 Finding the first Author:
 <script src="https://gist.github.com/linqueta/0fea04d627734618ca0598cfc0baa3e6.js"></script>
 
-As we can see the first Author created was the famous (or almost it) Yukihiro Matsumoto but was returned as the first the Rails creator, David Heinemeier Hansson. It happened because ActiveRecord uses the field `id` to order fields as can be seeing in the log:
+As we can see the first Author created was the famous (or almost it) Yukihiro Matsumoto, but was returned as the first the Rails creator, David Heinemeier Hansson. It happened because ActiveRecord uses the field `id` to order fields as can be seeing in the log:
 ```ruby
   Author Load (1.2ms)  SELECT  "authors".* FROM "authors" ORDER BY "authors"."id" ASC LIMIT $1  [["LIMIT", 1]]
 ```
