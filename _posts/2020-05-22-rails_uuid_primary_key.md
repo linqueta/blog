@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Using UUID as a primary key in Ruby on Rails
+title: Using UUID as a primary key on Ruby on Rails
 date: 2019-05-12 17:00
 categories: rails uuid active_record
 summary: Make strong and secure ids for your models!
