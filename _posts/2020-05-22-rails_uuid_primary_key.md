@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Using UUID as a primary key on Ruby on Rails
-date: 2019-05-12 17:00
+date: 2019-05-24 21:00
 categories: rails uuid active_record
 summary: Make strong and secure ids for your models!
 description: Make strong and secure ids for your models!
@@ -22,7 +22,7 @@ It's known ActiveRecord uses the sequential number or Sequential ID in this fiel
 There is another way to make this identifier without these problems, using **UUID** as a record identifier.
 
 ### Universally Unique Identifier
-Universally Unique Identifier or UUID is a 16-octets/128-bit number used to identify information in computer systems. The UUID value is standardized by RFC 4122 to ensure that distributed systems be able to use it.
+[Universally Unique Identifier or UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) is a 16-octets/128-bit number used to identify information in computer systems. The UUID value is standardized by RFC 4122 to ensure that distributed systems be able to use it.
 
 In its canonical textual representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32 alphanumeric characters and 4 hyphens). For example:
 
@@ -141,6 +141,3 @@ Here are some tests for checking how UUID behaves when compared with Sequential 
 ### Final words
 
 I think that you should consider to use it in your next project because UUID is a secure, strong and not predictable id for models. Besides that, UUID performance is the same using Sequential ID and it has an easy implementation using ActiveRecord and Postgresql.
-
-#### Fonts
-- https://en.wikipedia.org/wiki/Universally_unique_identifier
