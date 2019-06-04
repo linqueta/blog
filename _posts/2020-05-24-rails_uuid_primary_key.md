@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Using UUID as a primary key on Ruby on Rails
+title: Using UUID as a primary key on Ruby on Rails with Postgresql
 date: 2019-05-24 21:00
 categories: rails uuid active_record
 summary: Make strong and secure ids for your models!
@@ -140,4 +140,4 @@ Here are some tests for checking how UUID behaves when compared with Sequential 
 
 ### Final words
 
-I think that you should consider to use it in your next project because UUID is a secure, strong and not predictable id for models. Besides that, UUID performance is the same using Sequential ID and it has an easy implementation using ActiveRecord and Postgresql.
+I think that you should consider to use it in your next project because UUID is a secure, strong and not predictable id for models. Besides that, UUID performance is the same using Sequential ID and it has an easy implementation using ActiveRecord and Postgresql. If you want to a see a complete application implementing it you can see in this [repository](https://github.com/linqueta/rails-uuid-postgres) in my [Github](https://github.com/linqueta).
