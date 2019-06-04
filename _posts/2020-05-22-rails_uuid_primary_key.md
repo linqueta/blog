@@ -68,7 +68,7 @@ Now, run `rails db:migrate` and we will have the follow database's schema:
 
 With the required extensions we can create the first model, typing this command below:
 ```bash
-  rails g model Author title:string
+  rails g model Author name:string
 ```
 
 And was generated this code:
