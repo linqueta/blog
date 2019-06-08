@@ -5,7 +5,7 @@ date: 2019-05-24 21:00
 categories: rails uuid active_record
 summary: Make strong and secure ids for your models!
 description: Make strong and secure ids for your models!
-tags: rails uuid active_record
+tags: rails uuid active_record postgresql
 image: https://res.cloudinary.com/linqueta/image/upload/v1558403259/keys_ygx9qv.jpg
 ---
 
