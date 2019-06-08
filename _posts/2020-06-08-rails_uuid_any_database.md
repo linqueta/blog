@@ -1,7 +1,7 @@
 ---
 layout: post
 title: UUID on Ruby on Rails with any database
-date: 2019-06-04 20:00
+date: 2019-06-08 18:30
 categories: rails uuid active_record any_database
 summary: You can use it in any database. Trust in me!
 description: You can use it in any database. Trust in me!
