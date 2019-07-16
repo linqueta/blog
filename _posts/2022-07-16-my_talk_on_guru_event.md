@@ -1,7 +1,7 @@
 ---
 layout: post
-title: My talk about UUID on 54º GuruSP meeting
-date: 2019-07-15 11:00
+title: My talk about UUID on 54th GuruSP meeting
+date: 2019-07-16 11:00
 categories: rails uuid active_record talk guru
 summary: My second talk and I'm so happy with it!
 description: My second talk and I'm so happy with it!
