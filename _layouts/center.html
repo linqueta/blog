@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
 {% include head.html %}
-<body class="site{% if site.animated %} animated fade-in-down{% endif %}">
-    {% if site.google_tag_manager %}
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    {% endif %}
+
+<body class="site{% if site.animated %} animated fade-in-down{% endif %}" itemscope
+  itemtype="https://schema.org/WebPage">
+
+  <meta itemprop="accessibilityControl" content="fullKeyboardControl">
+  <meta itemprop="accessibilityControl" content="fullMouseControl">
+  <meta itemprop="accessibilityHazard" content="noFlashingHazard">
+  <meta itemprop="accessibilityHazard" content="noMotionSimulationHazard">
+  <meta itemprop="accessibilityHazard" content="noSoundHazard">
+  <meta itemprop="accessibilityAPI" content="ARIA">
+
+  {% if site.google_tag_manager %}
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  {% endif %}
   <div class="site-wrap center">
     {% include header.html %}
 
@@ -18,4 +28,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   {% include footer.html %}
 </body>
+
 </html>
