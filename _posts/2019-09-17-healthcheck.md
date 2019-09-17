@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Health checking a Rails app using Rails::Healthcheck
+title: Healthcheck an app using Rails::Healthcheck
 date: 2019-09-17 12:00
 categories: rails healthcheck opensource
 summary: Easy and simple way to check your app's health
@@ -12,9 +12,10 @@ repo: https://github.com/linqueta/rails-healthcheck
 
 [![image]({{ page.image }})]({{ page.repo }})
 
-In the last Sunday, at 3:00 a.m., I was without sleep and I was already thinking about a way to check if my applications are running without errors, mainly on the nigths. I'd searched and I didn't find one that attend my requirements:
+In the last Sunday, at 3:00 a.m., I was without sleep and I was already thinking about a way to check if my applications are running without errors, mainly on the nigths. I'd searched and I didn't find one gem to attend my requirements:
   - Easy to plug in a Ruby on Rails application
-  - Simple to configure the route and the http codes in its responses
+  - Simple to configure the route and the http codes
+  - Fast to run (parallelized if possible)
 
 After this search, I've motivated to create my own library, so I created the gem [rails-healthcheck]({{ page.repo }}) to attend my requirements. This gem is open source, so the community can contribute to hold it always updated and without security issues.
 
@@ -22,19 +23,19 @@ So, in this post I will teach how to install and use the gem.
 
 ### Installing
 
-First, I will create a Rails app with this command:
+First I will create a Rails app with the follow command:
 
 ```
 rails new my_app -d=postgresql
 ```
 
-To set the gem is very simple, you just have to set in your Gemfile:
+Now I will set the gem [rails-healthcheck]({{ page.repo }}) where I have to append in my Gemfile to get it:
 
 ```ruby
 gem 'rails-healthcheck'
 ```
 
-And, after it, you have to run to get the gem from RubyGems server and run a rake to install to plug the route and set the initializer file:
+Afer added, I have to run the command `bundle` to get this gem's source from RubyGems and run a rake to plug the healthcheck route and set the initializer file with this command bellow:
 
 ```
 rails healthcheck:install
@@ -44,7 +45,7 @@ rails healthcheck:install
 #  -    modify      config/routes.rb
 ```
 
-This rake plug the Healthcheck::Router in your _config/routes.rb_, like this code:
+This rake plugs the `Healthcheck::Router` in your _config/routes.rb_, like this code:
 
 ```ruby
 Rails.application.routes.draw do
@@ -78,13 +79,118 @@ Healthcheck.configure do |config|
 end
 ```
 
-
+### Setting my checks and testing
 
 In my test project, I will set firt a validation to check if database is available:
 
 ```ruby
-# frozen_string_literal: true
+# config/intializers/healthcheck.rb
+# ...
+  config.add_check :database, -> { ActiveRecord::Base.connection.execute('select 1') }
+#...
 ```
+
+And now, I will send a request to GET /healthcheck:
+
+```
+curl -i localhost:3000/healthcheck
+
+HTTP/1.1 200 OK
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Permitted-Cross-Domain-Policies: none
+Referrer-Policy: strict-origin-when-cross-origin
+Content-Type: text/html
+Cache-Control: no-cache
+X-Request-Id: 7e8440d4-e3be-4df6-a87d-3c2d1b2e877b
+X-Runtime: 0.028443
+Transfer-Encoding: chunked
+```
+
+Wow, how my database is available, the api returned 200.
+
+Now, I will force an error. In the initializer, I will add a check to execute a division by zero:
+
+```ruby
+# config/intializers/healthcheck.rb
+# ...
+  config.add_check :database, -> { ActiveRecord::Base.connection.execute('select 1') }
+  config.add_check :zero_division, -> { 10/0 }
+#...
+```
+
+And send a request again:
+
+```
+curl -i localhost:3000/healthcheck
+
+HTTP/1.1 503 Service Unavailable
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Permitted-Cross-Domain-Policies: none
+Referrer-Policy: strict-origin-when-cross-origin
+Content-Type: text/html
+Cache-Control: no-cache
+X-Request-Id: 0850e8c0-acea-4b98-932d-69da957a303f
+X-Runtime: 0.023687
+Transfer-Encoding: chunked
+```
+
+Nice, now I have the http code 503, it meanings that some check raise an error when was executed the checks.
+
+I can set to get in the response what raises error setting the verbose mode in the initializer:
+
+```ruby
+# config/intializers/healthcheck.rb
+# ...
+  config.verbose = true
+#...
+```
+
+Lastly I will send another request to get the errros:
+
+```
+curl -i localhost:3000/healthcheck
+
+HTTP/1.1 503 Service Unavailable
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Permitted-Cross-Domain-Policies: none
+Referrer-Policy: strict-origin-when-cross-origin
+Content-Type: application/json; charset=utf-8
+Cache-Control: no-cache
+X-Request-Id: 0bc3c278-d036-48e5-8ad9-9353719212a0
+X-Runtime: 0.025519
+Transfer-Encoding: chunked
+
+{
+  "code":503,
+  "errors":[
+    {
+      "name":"zero_division",
+      "exception":"ZeroDivisionError",
+      "message":"divided by 0"
+    }
+  ]
+}
+```
+
+In the last, the response includes what errors were raised in checks.
+
+### Why should you use this gem:
+
+The gem [rails-healthcheck]({{ page.repo }}) have many benefits:
+  - Open Source: The community can improve and let safe from security issues
+  - Fast: This gem run the checks in parallel without use any library to execute them, just ruby and ActionController in the controller.
+  - Simple: You just have to run the command `rails healthcheck:install` and use the healthcheck api
+  - Test coverage 100%: At least all lines were tested (rs)
+
 
 <style>
 a:hover{
