@@ -6,7 +6,7 @@ categories: rails healthcheck opensource
 summary: Easy and simple way to check your app's health
 description: Easy and simple way to check your app's health
 tags: rails healthcheck opensource
-image: https://res.cloudinary.com/linqueta/image/upload/v1568688510/healthcheck_ypelrf.png
+image: https://res.cloudinary.com/linqueta/image/upload/v1568776002/healthcheck_ypelrf.png
 repo: https://github.com/linqueta/rails-healthcheck
 ---
 
@@ -47,48 +47,17 @@ rails healthcheck:install
 
 This rake plugs the `Healthcheck::Router` in your _config/routes.rb_, like this code:
 
-```ruby
-Rails.application.routes.draw do
-  Healthcheck.routes(self)
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-end
-```
+<script src="https://gist.github.com/linqueta/a7f4bac49a6c2472152440c2a0133909.js"></script>
 
 And create the initializer in _config/initializers/healthcheck.rb_ where you will set the settings for this gem works as well:
 
-```ruby
-# frozen_string_literal: true
-
-Healthcheck.configure do |config|
-  config.success = 200
-  config.error = 503
-  config.verbose = false
-  config.route = '/healthcheck'
-  config.method = :get
-
-  # -- Checks --
-  # Check if the db is available
-  # config.add_check :database, -> { ActiveRecord::Base.connection.execute('select 1') }
-  # Check if the db is available and without pending migrations
-  # config.add_check :migrations,-> { ActiveRecord::Migration.check_pending! }
-  # Check if the cache is available
-  # config.add_check :cache, -> { Rails.cache.read('some_key') }
-  # Check if the application required envs are defined
-  # config.add_check :environments, -> { Dotenv.require_keys('ENV_NAME', 'ANOTHER_ENV') }
-end
-```
+<script src="https://gist.github.com/linqueta/58dae0bdcdfe5efa95933197f645a669.js"></script>
 
 ### Setting my checks and testing
 
 In my test project, I will set the first validation to check if the database is available:
 
-```ruby
-# config/intializers/healthcheck.rb
-# ...
-  config.add_check :database, -> { ActiveRecord::Base.connection.execute('select 1') }
-#...
-```
+<script src="https://gist.github.com/linqueta/ac6fa89b926a14f75b30c113be71c94f.js"></script>
 
 And now, I will send a request to GET /healthcheck:
 
@@ -111,13 +80,7 @@ Transfer-Encoding: chunked
 
 Wow, how my database is available, the API returned 200. Now, I will force an error, so, in the initializer, I will add a check to execute a division by zero:
 
-```ruby
-# config/intializers/healthcheck.rb
-# ...
-  config.add_check :database, -> { ActiveRecord::Base.connection.execute('select 1') }
-  config.add_check :zero_division, -> { 10/0 }
-#...
-```
+<script src="https://gist.github.com/linqueta/7e5292c594ec217ef88e2bd80912e7ac.js"></script>
 
 And send a request again:
 
@@ -140,12 +103,7 @@ Transfer-Encoding: chunked
 
 Nice, now I have the HTTP code 503, it meanings that some check raises an error when was executed the checks. I can set to get in the response what raises error setting the verbose mode in the initializer:
 
-```ruby
-# config/intializers/healthcheck.rb
-# ...
-  config.verbose = true
-#...
-```
+<script src="https://gist.github.com/linqueta/8e0cc31ffad658f0d7e5d156765debf3.js"></script>
 
 Lastly, I will send another request to get the errors:
 
