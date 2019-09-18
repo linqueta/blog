@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Healthcheck an app using Rails::Healthcheck
-date: 2019-09-17 12:00
+date: 2019-09-18 08:00
 categories: rails healthcheck opensource
 summary: Easy and simple way to check your app's health
 description: Easy and simple way to check your app's health
@@ -137,7 +137,7 @@ Transfer-Encoding: chunked
 
 In the last, the response includes what errors were raised in checks.
 
-### Why should you use this gem:
+### The why you should use this gem:
 
 The gem [rails-healthcheck]({{ page.repo }}) have many benefits:
   - Open Source: The community can improve and let safe from security issues
