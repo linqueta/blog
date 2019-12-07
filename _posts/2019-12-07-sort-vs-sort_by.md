@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Sort or sort_by? Which one do I have to use?
-date: 2019-12-07 12:00
+date: 2019-12-07 18:00
 categories: ruby sort sort_by reverse sorting performance
 summary: Knowing the better way to sort arrays in Ruby
 description: Knowing the better way to sort arrays in Ruby
