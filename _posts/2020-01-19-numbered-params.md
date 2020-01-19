@@ -35,7 +35,7 @@ Before this feature, we write blocks in these ways:
 
 <script src="https://gist.github.com/linqueta/94c54cb78b9b27b960cc996b85bd19eb.js"></script>
 
-And using Numbered Parameters:
+And using **Numbered Parameters**:
 
 <script src="https://gist.github.com/linqueta/c82c5bc91ce7506cdbf10d59c962f6ba.js"></script>
 
