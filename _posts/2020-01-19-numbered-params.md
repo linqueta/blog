@@ -43,7 +43,7 @@ This feature decreases the params' name length and turns simple to understand th
 
 ### Mistake
 
-Numbered Params is nice but it has a some mistake. When you have a block and you have to call a block method inside this block, Numbered Parameters doesn't work as well. Example:
+Numbered Params is nice but it has a mistake. When you have a block and you have to call a block method inside this block, Numbered Parameters doesn't work as well. Example:
 
 <script src="https://gist.github.com/linqueta/ddefadf3f217d7793ed1a47beab64335.js"></script>
 
