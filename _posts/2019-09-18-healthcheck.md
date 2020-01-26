@@ -35,14 +35,13 @@ Now I will set the gem [rails-healthcheck]({{ page.repo }}) where I have to appe
 gem 'rails-healthcheck'
 ```
 
-Afer added I have to run the command `bundle` to get this gem's source from RubyGems and run a rake to plug the health check route and set the initializer file with this command below:
+After added I have to run the command `bundle` to get this gem's source from RubyGems and run a rake to plug the health check route and set the initializer file with this command below:
 
 ```
-rails healthcheck:install
+rails generate healthcheck:install
 
-#  -  invoke        Rails::Healthcheck
-#  -    create      config/initializers/healthcheck.rb
-#  -    modify      config/routes.rb
+#  create  config/initializers/healthcheck.rb
+#  route  Healthcheck.routes(self)
 ```
 
 This rake plugs the `Healthcheck::Router` in your _config/routes.rb_, like this code:
