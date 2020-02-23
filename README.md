@@ -1,1 +1,1 @@
-# Blog linqueta
+# Blog linqueta :D
