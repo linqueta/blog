@@ -8,6 +8,7 @@ description: Easy and simple way to check your app's health
 tags: rails healthcheck opensource
 image: https://res.cloudinary.com/linqueta/image/upload/v1568776002/healthcheck_ypelrf.png
 repo: https://github.com/linqueta/rails-healthcheck
+featured: true
 ---
 
 [![image]({{ page.image }})]({{ page.repo }})

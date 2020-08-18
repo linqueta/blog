@@ -1,42 +1,62 @@
 ---
 layout: default
 ---
+{% assign min = 0 %}
+{% assign featured = site.posts | where:"featured",true | first %}
 {% assign posts_count = paginator.posts | size %}
 
 <div class="home">
-  {% if posts_count > 0 %}
-    <div class="posts">
-      {% for post in paginator.posts %}
-        <div class="post py3">
-          <p class="post-meta">
-	    {% if site.date_format %}
-	      {{ post.date | date: site.date_format }}
-	    {% else %}
-	      {{ post.date | date: "%b %-d, %Y" }}
-	    {% endif %}
-	  </p>
-          <a href="{{ post.url | relative_url }}" class="post-link"><h2 class="post-title">{{ post.title }}</h3></a>
-          <span class="post-summary">
-            {% if post.summary %}
-              {{ post.summary }}
-            {% else %}
-              {{ post.excerpt }}
-            {% endif %}
-          </span>
-        </br>
-          <p class="post-tags">
-            {% if post.tags %}
-              {% for tag in post.tags %}
-                #{{ tag }}
-              {% endfor %}
-            {% endif %}
-          </p>
-        </div>
-      {% endfor %}
-    </div>
 
-    {% include pagination.html %}
+  {% if posts_count > 0 %}
+
+  <div class="featured">
+    <div class="post py3">
+      <i class="fa fa-star">
+        <span class="featured-badge">Featured</span>
+      </i>
+
+      <a href="{{ featured.url | relative_url }}" class="post-link">
+        <h2 class="post-title featured-title">
+          {{ featured.title }}
+        </h2>
+      </a>
+    </div>
+  </div>
+
+  <div class="posts">
+    {% for post in paginator.posts %}
+    <div class="post py3">
+      <p class="post-meta">
+        {% if site.date_format %}
+        {{ post.date | date: site.date_format }}
+        {% else %}
+        {{ post.date | date: "%b %-d, %Y" }}
+        {% endif %}
+      </p>
+      <a href="{{ post.url | relative_url }}" class="post-link">
+        <h2 class="post-title">{{ post.title }}</h2>
+      </a>
+      <span class="post-summary">
+        {% if post.summary %}
+        {{ post.summary }}
+        {% else %}
+        {{ post.excerpt }}
+        {% endif %}
+      </span>
+      </br>
+      <p class="post-tags">
+        {% if post.tags %}
+        {% for tag in post.tags %}
+        #{{ tag }}
+        {% endfor %}
+        {% endif %}
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% include pagination.html %}
   {% else %}
-    <h1 class='center'>{{ site.text.index.coming_soon }}</h1>
+  <h1 class='center'>{{ site.text.index.coming_soon }}</h1>
   {% endif %}
 </div>

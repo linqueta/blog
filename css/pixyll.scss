@@ -34,3 +34,16 @@
 @import 'gists';
 @import 'measure';
 @import 'pagination';
+
+.featured-badge {
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.featured-title {
+  font-size: 25pt;
+}
+
+.featured {
+  border-bottom: thin solid #f3f3f3;
+}
